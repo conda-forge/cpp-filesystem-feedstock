@@ -12,7 +12,7 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win and vc<14]
 
 requirements:
@@ -31,8 +31,8 @@ test:
 
 about:
   home: https://github.com/gulrak/filesystem
-  license: BSD-3-Clause
-  license_family: BSD
+  license: MIT
+  license_family: MIT
   license_file: LICENSE
   summary: An implementation of C++17 std::filesystem
   description: An implementation of C++17 std::filesystem for C++11 /C++14/C++17 on Windows, macOS, Linux and FreeBSD.
