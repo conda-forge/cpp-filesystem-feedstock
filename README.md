@@ -3,9 +3,9 @@ About cpp-filesystem
 
 Home: https://github.com/gulrak/filesystem
 
-Package license: BSD-3-Clause
+Package license: MIT
 
-Feedstock license: BSD-3-Clause
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/cpp-filesystem-feedstock/blob/master/LICENSE.txt)
 
 Summary: An implementation of C++17 std::filesystem
 
