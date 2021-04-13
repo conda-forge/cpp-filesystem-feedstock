@@ -1,6 +1,6 @@
 {% set name = "cpp-filesystem" %}
-{% set version = "1.4.0" %}
-{% set sha256 = "332fb8afda06671090c755c623da15889b66cfdedcf6f343d38a28a930ea5304" %}
+{% set version = "1.5.4" %}
+{% set sha256 = "fc40ec517fa7457a44dc9adabcbe4245951115a08967bb48f9d632dd40d14b4e" %}
 
 package:
   name: {{ name|lower }}
@@ -25,9 +25,9 @@ requirements:
 test:
   commands:
     - test -f ${PREFIX}/include/ghc/filesystem.hpp  # [unix]
-    - test -f ${PREFIX}/lib/cmake/ghcFilesystem/ghcFilesystemConfig.cmake  # [unix]
-    - if exist %LIBRARY_PREFIX%\include\ghc\filesystem.hpp (exit 0) else (exit 1)  # [win]
-    - if exist %LIBRARY_PREFIX%\lib\cmake\ghcFilesystemConfig.cmake (exit 0) else (exit 1)  # [win]
+    - test -f ${PREFIX}/lib/cmake/ghc_filesystem/ghc_filesystem-config.cmake  # [unix]
+    - if not exist %LIBRARY_PREFIX%\include\ghc\filesystem.hpp (exit 1)  # [win]
+    - if not %LIBRARY_PREFIX%\lib\cmake\ghc_filesystem\ghc_filesystem-config.cmake (exit 1)  # [win]
 
 about:
   home: https://github.com/gulrak/filesystem
