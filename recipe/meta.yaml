@@ -1,6 +1,7 @@
 {% set name = "cpp-filesystem" %}
-{% set version = "1.5.8" %}
-{% set sha256 = "726f8ccb2ec844f4c66cc4b572369497327df31b86c04cefad6b311964107139" %}
+{% set version = "1.5.10" %}
+{% set sha256 = "9b96a024679807879fdfb30e46e8e461293666aeeee5fbf7f5af75aeacdfea29" %}
+{% set build_number = "0" %}
 
 package:
   name: {{ name|lower }}
@@ -12,15 +13,14 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 0
+  number: {{ build_number }}
   skip: true  # [win and vc<14]
 
 requirements:
   build:
     - {{ compiler('cxx') }}
     - cmake
-    - make  # [unix]
-  host: []  # Empty host dependency section
+    - ninja
 
 test:
   commands:
@@ -36,6 +36,9 @@ about:
   license_file: LICENSE
   summary: An implementation of C++17 std::filesystem
   description: An implementation of C++17 std::filesystem for C++11 /C++14/C++17 on Windows, macOS, Linux and FreeBSD.
+  dev_url: https://github.com/gulrak/filesystem
+  doc_url: https://github.com/gulrak/filesystem/blob/master/README.md#documentation
+  doc_src_url: https://github.com/gulrak/filesystem/blob/master/README.md
 
 extra:
   recipe-maintainers:

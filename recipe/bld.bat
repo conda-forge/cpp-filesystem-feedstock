@@ -1,9 +1,21 @@
-cmake -G "NMake Makefiles" -D BUILD_TESTS=OFF -D CMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% %SRC_DIR% ^
-    -DGHC_FILESYSTEM_BUILD_TESTING=OFF -DGHC_FILESYSTEM_BUILD_EXAMPLES=OFF
+:: Windows
+
+echo "================= begin ==================="
+
+:: Isolate the build
+mkdir build
+cd build
 if errorlevel 1 exit 1
 
-nmake
+:: Generate the build files
+cmake -G "Ninja" ^
+      -DCMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% ^
+      -DBUILD_TESTS=OFF ^
+      -DGHC_FILESYSTEM_BUILD_TESTING=OFF ^
+      -DGHC_FILESYSTEM_BUILD_EXAMPLES=OFF ^
+      %SRC_DIR%
 if errorlevel 1 exit 1
 
-nmake install
+:: Build and install
+ninja install
 if errorlevel 1 exit 1
