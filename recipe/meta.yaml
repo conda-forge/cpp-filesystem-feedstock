@@ -1,6 +1,6 @@
 {% set name = "cpp-filesystem" %}
-{% set version = "1.5.8" %}
-{% set sha256 = "726f8ccb2ec844f4c66cc4b572369497327df31b86c04cefad6b311964107139" %}
+{% set version = "1.5.10" %}
+{% set sha256 = "9b96a024679807879fdfb30e46e8e461293666aeeee5fbf7f5af75aeacdfea29" %}
 
 package:
   name: {{ name|lower }}
