@@ -3,8 +3,8 @@ channel_sources:
 channel_targets:
 - conda-forge main
 cxx_compiler:
-- vs2019
+- vs2022
 target_platform:
-- win-64
+- win-arm64
 vc:
 - '14'
