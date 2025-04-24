@@ -1,9 +1,19 @@
-cmake -G "NMake Makefiles" -D BUILD_TESTS=OFF -D CMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% %SRC_DIR% ^
-    -DGHC_FILESYSTEM_BUILD_TESTING=OFF -DGHC_FILESYSTEM_BUILD_EXAMPLES=OFF
+@echo on
+
+mkdir build
+cd build
+
+cmake -G Ninja ^
+    %CMAKE_ARGS% ^
+    -D BUILD_TESTS=OFF ^
+    -D CMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% ^
+    -D GHC_FILESYSTEM_BUILD_TESTING=OFF ^
+    -D GHC_FILESYSTEM_BUILD_EXAMPLES=OFF ^
+    %SRC_DIR%
 if errorlevel 1 exit 1
 
-nmake
+cmake --build .
 if errorlevel 1 exit 1
 
-nmake install
+cmake --build . --target install
 if errorlevel 1 exit 1

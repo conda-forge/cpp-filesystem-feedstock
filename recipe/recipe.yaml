@@ -3,7 +3,6 @@ schema_version: 1
 context:
   name: cpp-filesystem
   version: 1.5.12
-  sha256: 7d62c5746c724d28da216d9e11827ba4e573df15ef40720292827a4dfd33f2e9
 
 package:
   name: ${{ name|lower }}
@@ -11,31 +10,29 @@ package:
 
 source:
   url: https://github.com/gulrak/filesystem/archive/v${{ version }}.tar.gz
-  sha256: ${{ sha256 }}
-  file_name: ${{ name }}-${{ version }}.tar.gz
+  sha256: 7d62c5746c724d28da216d9e11827ba4e573df15ef40720292827a4dfd33f2e9
 
 build:
   number: 1
-  skip: win and vc<14
 
 requirements:
   build:
     - ${{ compiler('cxx') }}
+    - ${{ stdlib('c') }}
     - cmake
-    - if: unix
-      then: make
-  host: []  # Empty host dependency section
+    - ninja
 
 tests:
-  - script:
+  - package_contents:
+      include: 
+        - ghc/filesystem.hpp
+      files:
       - if: unix
-        then: test -f ${PREFIX}/include/ghc/filesystem.hpp
-      - if: unix
-        then: test -f ${PREFIX}/lib/cmake/ghc_filesystem/ghc_filesystem-config.cmake
+        then: 
+          - lib/cmake/ghc_filesystem/ghc_filesystem-config.cmake
       - if: win
-        then: if not exist %LIBRARY_PREFIX%/include/ghc/filesystem.hpp (exit 1)
-      - if: win
-        then: if not exist %LIBRARY_PREFIX%/lib/cmake/ghc_filesystem/ghc_filesystem-config.cmake (exit 1)
+        then: 
+          - Library/lib/cmake/ghc_filesystem/ghc_filesystem-config.cmake
 
 about:
   license: MIT
@@ -48,3 +45,4 @@ extra:
   recipe-maintainers:
     - SylvainCorlay
     - JohanMabille
+    - baszalmstra
