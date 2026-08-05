@@ -37,6 +37,9 @@ move /y pixi.toml pixi.toml.bak
 set "arch=64"
 if "%PROCESSOR_ARCHITECTURE%"=="ARM64" set "arch=arm64"
 powershell -NoProfile -ExecutionPolicy unrestricted -Command "(Get-Content pixi.toml.bak -Encoding UTF8) -replace 'platforms = .*', 'platforms = [''win-%arch%'']' | Out-File pixi.toml -Encoding UTF8"
+:: Git on Windows needs to run post link scripts to properly set up SSL certificates
+pixi config set --global run-post-link-scripts insecure
+if !errorlevel! neq 0 exit /b !errorlevel!
 pixi install
 if !errorlevel! neq 0 exit /b !errorlevel!
 pixi list
@@ -71,6 +74,11 @@ if !errorlevel! neq 0 exit /b !errorlevel!
 if EXIST LICENSE.txt (
     echo Copying feedstock license
     copy LICENSE.txt "recipe\\recipe-scripts-license.txt"
+)
+if NOT [%HOST_PLATFORM%] == [%BUILD_PLATFORM%] (
+    if [%CROSSCOMPILING_EMULATOR%] == [] (
+        set "EXTRA_CB_OPTIONS=%EXTRA_CB_OPTIONS% --test skip"
+    )
 )
 
 if NOT [%flow_run_id%] == [] (
