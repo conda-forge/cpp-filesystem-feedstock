@@ -1,7 +1,7 @@
 c_stdlib:
 - sysroot
 c_stdlib_version:
-- '2.17'
+- '2.39'
 channel_sources:
 - conda-forge
 channel_targets:
@@ -13,4 +13,4 @@ cxx_compiler_version:
 docker_image:
 - quay.io/condaforge/linux-anvil-x86_64:alma10
 target_platform:
-- linux-ppc64le
+- linux-riscv64
